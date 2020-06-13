@@ -50,7 +50,7 @@ public class Panel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
         
         //textfield
-        weightInText.setText(Integer.toString(Memory.getWeight(ex)));
+        weightInText.setText(Integer.toString(Memory.instance().getWeight(ex)));
 
         //layout
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(this);
@@ -94,7 +94,7 @@ public class Panel extends javax.swing.JPanel {
 
     private void setupTable(javax.swing.JTable table, Exercise ex) {
         table.setModel(new javax.swing.table.DefaultTableModel(
-                ComputePercentages.compute(Memory.getWeight(ex)),
+                ComputePercentages.instance().compute(Memory.instance().getWeight(ex)),
                 new String[]{
                     "Percentage", "Weight", "10Rep", "9Rep", "8Rep", "7Rep", "6Rep", "5Rep", "4Rep", "3Rep", "2Rep", "1Rep",}
         ) {
@@ -115,7 +115,7 @@ public class Panel extends javax.swing.JPanel {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
         if (weightInText.getText() != null) {
-            Memory.setWeight(ex, Integer.valueOf(weightInText.getText()));
+            Memory.instance().setWeight(ex, Integer.valueOf(weightInText.getText()));
             this.setupTable(jTable1, ex);
 
         }

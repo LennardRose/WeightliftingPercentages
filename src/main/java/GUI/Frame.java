@@ -19,7 +19,7 @@ public class Frame extends javax.swing.JFrame {
 
     //read data from file, create GUI maincomponent
     private Frame() {
-        Memory.ReadMapFromFile();
+        Memory.instance().ReadMapFromFile();
         initComponents();
     }
 
@@ -48,7 +48,7 @@ public class Frame extends javax.swing.JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
-                Memory.WriteMapToFile();
+                Memory.instance().WriteMapToFile();
                 System.exit(0);
             }
         });

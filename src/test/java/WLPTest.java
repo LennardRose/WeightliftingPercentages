@@ -45,8 +45,8 @@ public class WLPTest {
     // public void hello() {}
     @Test
     public void testMemory() {
-        Memory.ReadMapFromFile();
-        Memory.setWeight(Exercise.Pushjerk, 100);
-        assertEquals(Memory.getWeight(Exercise.Pushjerk), 100);
+        Memory.instance().ReadMapFromFile();
+        Memory.instance().setWeight(Exercise.Pushjerk, 100);
+        assertEquals(Memory.instance().getWeight(Exercise.Pushjerk), 100);
     }
 }

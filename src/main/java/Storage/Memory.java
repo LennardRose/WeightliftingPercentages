@@ -22,17 +22,26 @@ import java.util.Map;
  * @author Lennard
  */
 public class Memory {
+    
+    private static Memory mem = new Memory();
+    
+    private Memory()
+    {}
+    
+    public static Memory instance(){
+        return mem;
+    }
 
     static private Map<Exercise, Integer> weights;
 
     //set weight to map, not to file
-    public static void setWeight(Exercise ex, int w) {
+    public void setWeight(Exercise ex, int w) {
 
         weights.put(ex, w);
     }
 
     //get weight from map, not from file
-    public static int getWeight(Exercise ex) {
+    public int getWeight(Exercise ex) {
         if (weights.containsKey(ex)) {
             return weights.get(ex);
         } else {
@@ -42,7 +51,7 @@ public class Memory {
     }
 
     //read Enummap from file
-    public static void ReadMapFromFile() {
+    public void ReadMapFromFile() {
 
         try (FileInputStream fileIn = new FileInputStream("Weights.ser");
                 ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
@@ -54,7 +63,7 @@ public class Memory {
         }
     }
     //save map in file, overwrites the old one
-    public static void WriteMapToFile() {
+    public void WriteMapToFile() {
 
         try (FileOutputStream fileOut = new FileOutputStream("Weights.ser");
                 ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
