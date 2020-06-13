@@ -12,10 +12,14 @@ import java.awt.event.WindowEvent;
 import java.util.EnumSet;
 
 /**
- *
- * @author Lennard
+ * @author Lennard creates the tabbed pane
  */
 public class Frame extends javax.swing.JFrame {
+
+    /*
+    *Singleton pattern 
+     */
+    private static Frame frame = new Frame();
 
     //read data from file, create GUI maincomponent
     private Frame() {
@@ -23,11 +27,18 @@ public class Frame extends javax.swing.JFrame {
         initComponents();
     }
 
-    //initialize components
+    public static Frame instance() {
+        return frame;
+    }
+
+
+    /*
+    *initializes all tabs for every exercise, sets layout, adds windowlistener
+     */
     private void initComponents() {
-        
+
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        
+
         //iterate over enumclass Exercise and create a panel for each
         EnumSet.allOf(Exercise.class)
                 .forEach(ex -> jTabbedPane1.add(ex + "", new Panel(ex)));
@@ -44,7 +55,9 @@ public class Frame extends javax.swing.JFrame {
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
-        //save changes of the Map to the file when closing the window
+        /*
+        *save changes of the Map to the file when closing the window
+         */
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
@@ -59,15 +72,18 @@ public class Frame extends javax.swing.JFrame {
 
     public static void main(String args[]) {
 
-
-        /* Create and display the form */
+        /* 
+        *Create and display the frame
+         */
         java.awt.EventQueue.invokeLater(() -> {
-            new Frame().setVisible(true);
+            Frame.instance().setVisible(true);
         });
 
     }
 
-    //variable declaration
+    /*
+    *variable declaration
+     */
     private javax.swing.JTabbedPane jTabbedPane1;
 
 }

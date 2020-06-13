@@ -2,11 +2,11 @@ package GUI;
 
 import Storage.Memory;
 import Logic.Exercise;
-import Logic.ComputePercentages;
+import Logic.Compute;
 
 /**
- *
  * @author Lennard
+ * creates a panel for the tabbed panel, including table, buttons, labels and textboxes
  */
 public class Panel extends javax.swing.JPanel {
 
@@ -41,16 +41,16 @@ public class Panel extends javax.swing.JPanel {
                 saveButtonActionPerformed(evt);
             }
         });
-        
+
         //table
         setupTable(jTable1, ex);
         jTable1.setShowHorizontalLines(false);
         jTable1.setShowVerticalLines(false);
 
         jScrollPane1.setViewportView(jTable1);
-        
+
         //textfield
-        weightInText.setText(Integer.toString(Memory.instance().getWeight(ex)));
+        weightInText.setText(Double.toString(Memory.instance().getWeight(ex)));
 
         //layout
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(this);
@@ -92,9 +92,12 @@ public class Panel extends javax.swing.JPanel {
 
     }
 
+    /*
+    *create a table with 12 columns: percentage, weight and reps from 10 to 1
+     */
     private void setupTable(javax.swing.JTable table, Exercise ex) {
         table.setModel(new javax.swing.table.DefaultTableModel(
-                ComputePercentages.instance().compute(Memory.instance().getWeight(ex)),
+                Compute.instance().computeTablePercentages(Memory.instance().getWeight(ex)),
                 new String[]{
                     "Percentage", "Weight", "10Rep", "9Rep", "8Rep", "7Rep", "6Rep", "5Rep", "4Rep", "3Rep", "2Rep", "1Rep",}
         ) {
@@ -111,17 +114,21 @@ public class Panel extends javax.swing.JPanel {
         });
     }
 
-    //save value from textbox and trigger refresh table TO DO: table listens to button
+    /*
+    *save value from textbox and trigger refresh table TO DO: table listens to button
+     */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
         if (weightInText.getText() != null) {
-            Memory.instance().setWeight(ex, Integer.valueOf(weightInText.getText()));
+            Memory.instance().setWeight(ex, Double.valueOf(weightInText.getText()));
             this.setupTable(jTable1, ex);
 
         }
     }
 
-    // Variables declaration                   
+    /*
+    *variable declaration
+     */
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

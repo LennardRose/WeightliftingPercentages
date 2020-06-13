@@ -38,15 +38,13 @@ public class WLPTest {
     public void tearDown() throws Exception {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
     @Test
     public void testMemory() {
         Memory.instance().ReadMapFromFile();
         Memory.instance().setWeight(Exercise.Pushjerk, 100);
+        Memory.instance().WriteMapToFile();
+        Memory.instance().ReadMapFromFile();
         assertEquals(Memory.instance().getWeight(Exercise.Pushjerk), 100);
     }
 }
